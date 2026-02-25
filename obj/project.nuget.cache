@@ -1,0 +1,44 @@
+{
+  "version": 2,
+  "dgSpecHash": "yv1X2YF+T5E=",
+  "success": true,
+  "projectFilePath": "C:\\Cursos\\BlockChain\\Nivel4\\Ejecucíon Mainet\\10_RealPriceBrain\\10_RealPriceBrain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Usuario\\.nuget\\packages\\adraffy.ensnormalize\\0.3.1\\adraffy.ensnormalize.0.3.1.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\bouncycastle.cryptography\\2.5.1\\bouncycastle.cryptography.2.5.1.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\nbitcoin.secp256k1\\3.1.1\\nbitcoin.secp256k1.3.1.1.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\nethereum.abi\\5.8.0\\nethereum.abi.5.8.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\nethereum.accounts\\5.8.0\\nethereum.accounts.5.8.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\nethereum.blockchainprocessing\\5.8.0\\nethereum.blockchainprocessing.5.8.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\nethereum.contracts\\5.8.0\\nethereum.contracts.5.8.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\nethereum.hex\\5.8.0\\nethereum.hex.5.8.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\nethereum.jsonrpc.client\\5.8.0\\nethereum.jsonrpc.client.5.8.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\nethereum.jsonrpc.rpcclient\\5.8.0\\nethereum.jsonrpc.rpcclient.5.8.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\nethereum.keystore\\5.8.0\\nethereum.keystore.5.8.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\nethereum.merkle.patricia\\5.8.0\\nethereum.merkle.patricia.5.8.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\nethereum.model\\5.8.0\\nethereum.model.5.8.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\nethereum.rlp\\5.8.0\\nethereum.rlp.5.8.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\nethereum.rpc\\5.8.0\\nethereum.rpc.5.8.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\nethereum.signer\\5.8.0\\nethereum.signer.5.8.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\nethereum.signer.eip712\\5.8.0\\nethereum.signer.eip712.5.8.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\nethereum.util\\5.8.0\\nethereum.util.5.8.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\nethereum.util.rest\\5.8.0\\nethereum.util.rest.5.8.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\nethereum.web3\\5.8.0\\nethereum.web3.5.8.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "El paquete \"Newtonsoft.Json\" 11.0.2 tiene una vulnerabilidad de gravedad alta conocida, https://github.com/advisories/GHSA-5crp-9r3c-p9vr",
+      "projectPath": "C:\\Cursos\\BlockChain\\Nivel4\\Ejecucíon Mainet\\10_RealPriceBrain\\10_RealPriceBrain.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Cursos\\BlockChain\\Nivel4\\Ejecucíon Mainet\\10_RealPriceBrain\\10_RealPriceBrain.csproj",
+      "libraryId": "Newtonsoft.Json",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
+}
