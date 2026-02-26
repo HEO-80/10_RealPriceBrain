@@ -7,11 +7,8 @@ using Nethereum.ABI.FunctionEncoding.Attributes;
 
 class Program
 {
-    // 1. Vinculamos explícitamente la clase de salida para ayudar al traductor
     [Function("getReserves", typeof(ReservesOutput))]
-    public class GetReservesFunction : FunctionMessage
-    {
-    }
+    public class GetReservesFunction : FunctionMessage { }
 
     [FunctionOutput]
     public class ReservesOutput : IFunctionOutputDTO
@@ -22,7 +19,6 @@ class Program
         [Parameter("uint112", "_reserve1", 2)]
         public BigInteger Reserve1 { get; set; }
 
-        // 2. Usamos BigInteger para absorber cualquier formato numérico sin que C# explote
         [Parameter("uint32", "_blockTimestampLast", 3)]
         public BigInteger BlockTimestampLast { get; set; } 
     }
@@ -31,48 +27,49 @@ class Program
     {
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("--------------------------------------------------");
-        Console.WriteLine(" 📡 RADAR V2 - LEYENDO PRECIOS EN PANCAKESWAP     ");
+        Console.WriteLine(" 📡 RADAR V3 - ESCÁNER MULTI-DEX (PANCAKE vs BISWAP) ");
         Console.WriteLine("--------------------------------------------------\n");
         Console.ResetColor();
 
         string rpcUrl = "https://bnb-mainnet.g.alchemy.com/v2/aNChN_RMYlL4TN5pbzVEK";
         var web3 = new Web3(rpcUrl);
 
-        // string poolAddress = "0x16b9a82891338f9bA80E2D69CdDdFd8E10103A4E";
-        string poolAddress = "0x16b9a82891338f9bA80E2D6970FddA79D1eb0daE";
-        
+        // Direcciones oficiales de los Pools WBNB/USDT
+        string poolPancake = "0x16b9a82891338f9bA80E2D6970FddA79D1eb0daE";
+        string poolBiswap = "0xa98ea6356A316b44Bf710D8f9b6b4eA0081409EF"; 
+
         var getReservesMessage = new GetReservesFunction();
         var handler = web3.Eth.GetContractQueryHandler<GetReservesFunction>();
 
-        Console.WriteLine($"Ojos puestos en el Pool: {poolAddress}");
-        Console.WriteLine("Iniciando escáner...\n");
+        Console.WriteLine("Ojos puestos en PancakeSwap y Biswap...");
+        Console.WriteLine("Buscando oportunidades de arbitraje...\n");
 
         while (true)
         {
             try
             {
-                // Hacemos la llamada a la red
-                var reserves = await handler.QueryDeserializingToObjectAsync<ReservesOutput>(getReservesMessage, poolAddress);
+                // 1. Consultamos AMBOS exchanges a la vez
+                var resPancake = await handler.QueryDeserializingToObjectAsync<ReservesOutput>(getReservesMessage, poolPancake);
+                var resBiswap = await handler.QueryDeserializingToObjectAsync<ReservesOutput>(getReservesMessage, poolBiswap);
 
-                // 3. NUEVO: Red de seguridad. Si viene nulo o vacío, no intentamos leerlo.
-                if (reserves == null)
+                // Solo seguimos si ambos responden correctamente
+                if (resPancake != null && resBiswap != null && resPancake.Reserve0 > 0 && resBiswap.Reserve0 > 0)
                 {
-                    Console.WriteLine("Aviso: La red devolvió un valor nulo. Comprobando...");
-                }
-                else if (reserves.Reserve0 == 0)
-                {
-                    Console.WriteLine("Aviso: El pool indica que tiene 0 reservas (Vacío).");
-                }
-               else
-                {
-                    // CORRECCIÓN: Token0 (0x55...) es USDT y Token1 (0xbb...) es WBNB
-                    decimal reserve0USDT = (decimal)reserves.Reserve0 / 1000000000000000000m;
-                    decimal reserve1WBNB = (decimal)reserves.Reserve1 / 1000000000000000000m;
+                    // 2. Calculamos Precio en PancakeSwap (USDT es Token0, WBNB es Token1)
+                    decimal pUsdt0 = (decimal)resPancake.Reserve0 / 1000000000000000000m;
+                    decimal pWbnb1 = (decimal)resPancake.Reserve1 / 1000000000000000000m;
+                    decimal pricePancake = pUsdt0 / pWbnb1;
 
-                    // Precio = Cantidad de Dólares / Cantidad de Monedas
-                    decimal price = reserve0USDT / reserve1WBNB;
+                    // 3. Calculamos Precio en Biswap (Igual: USDT es Token0, WBNB es Token1)
+                    decimal bUsdt0 = (decimal)resBiswap.Reserve0 / 1000000000000000000m;
+                    decimal bWbnb1 = (decimal)resBiswap.Reserve1 / 1000000000000000000m;
+                    decimal priceBiswap = bUsdt0 / bWbnb1;
 
-                    Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] 1 WBNB = {price:F2} USDT");
+                    // 4. Calculamos la diferencia bruta (Spread)
+                    decimal spread = Math.Abs(pricePancake - priceBiswap);
+
+                    // Imprimimos la comparativa en pantalla
+                    Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] Pancake: {pricePancake:F2} | Biswap: {priceBiswap:F2} | Spread: {spread:F3} USDT");
                 }
             }
             catch (Exception e)
@@ -80,7 +77,7 @@ class Program
                 Console.WriteLine($"Excepción atrapada: {e.Message}");
             }
 
-            await Task.Delay(3000); // Respiro de 3 segundos para no bloquear la API
+            await Task.Delay(3000); 
         }
     }
 }
