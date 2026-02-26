@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("10_RealPriceBrain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3ca61ac374064cc326e67cd6e508ee56311dfa6a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4fdc8c79c55c29863c935399b74bccc12e8a6324")]
 [assembly: System.Reflection.AssemblyProductAttribute("10_RealPriceBrain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("10_RealPriceBrain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
