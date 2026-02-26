@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "yv1X2YF+T5E=",
+  "dgSpecHash": "9tg4YcRP1jE=",
   "success": true,
   "projectFilePath": "C:\\Cursos\\BlockChain\\Nivel4\\Ejecucíon Mainet\\10_RealPriceBrain\\10_RealPriceBrain.csproj",
   "expectedPackageFiles": [
@@ -31,7 +31,7 @@
     {
       "code": "NU1903",
       "level": "Warning",
-      "message": "El paquete \"Newtonsoft.Json\" 11.0.2 tiene una vulnerabilidad de gravedad alta conocida, https://github.com/advisories/GHSA-5crp-9r3c-p9vr",
+      "message": "Package 'Newtonsoft.Json' 11.0.2 has a known high severity vulnerability, https://github.com/advisories/GHSA-5crp-9r3c-p9vr",
       "projectPath": "C:\\Cursos\\BlockChain\\Nivel4\\Ejecucíon Mainet\\10_RealPriceBrain\\10_RealPriceBrain.csproj",
       "warningLevel": 1,
       "filePath": "C:\\Cursos\\BlockChain\\Nivel4\\Ejecucíon Mainet\\10_RealPriceBrain\\10_RealPriceBrain.csproj",
