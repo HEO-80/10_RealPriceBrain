@@ -63,14 +63,14 @@ class Program
                 {
                     Console.WriteLine("Aviso: El pool indica que tiene 0 reservas (Vacío).");
                 }
-                else
+               else
                 {
-                    // Convertimos el estándar Wei a decimales puros
-                    decimal reserve0WBNB = (decimal)reserves.Reserve0 / 1000000000000000000m;
-                    decimal reserve1USDT = (decimal)reserves.Reserve1 / 1000000000000000000m;
+                    // CORRECCIÓN: Token0 (0x55...) es USDT y Token1 (0xbb...) es WBNB
+                    decimal reserve0USDT = (decimal)reserves.Reserve0 / 1000000000000000000m;
+                    decimal reserve1WBNB = (decimal)reserves.Reserve1 / 1000000000000000000m;
 
-                    // Matemáticas simples: Precio = USDT / WBNB
-                    decimal price = reserve1USDT / reserve0WBNB;
+                    // Precio = Cantidad de Dólares / Cantidad de Monedas
+                    decimal price = reserve0USDT / reserve1WBNB;
 
                     Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] 1 WBNB = {price:F2} USDT");
                 }
