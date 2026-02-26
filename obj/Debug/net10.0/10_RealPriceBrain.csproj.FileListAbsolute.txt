@@ -37,3 +37,8 @@ C:\Cursos\BlockChain\Nivel4\Ejecucíon Mainet\10_RealPriceBrain\obj\Debug\net10.
 C:\Cursos\BlockChain\Nivel4\Ejecucíon Mainet\10_RealPriceBrain\obj\Debug\net10.0\10_RealPriceBrain.pdb
 C:\Cursos\BlockChain\Nivel4\Ejecucíon Mainet\10_RealPriceBrain\obj\Debug\net10.0\10_RealPriceBrain.genruntimeconfig.cache
 C:\Cursos\BlockChain\Nivel4\Ejecucíon Mainet\10_RealPriceBrain\obj\Debug\net10.0\ref\10_RealPriceBrain.dll
+C:\Cursos\BlockChain\Nivel4\Ejecucíon Mainet\10_RealPriceBrain\bin\Debug\net10.0\DotNetEnv.dll
+C:\Cursos\BlockChain\Nivel4\Ejecucíon Mainet\10_RealPriceBrain\bin\Debug\net10.0\Microsoft.Extensions.Configuration.dll
+C:\Cursos\BlockChain\Nivel4\Ejecucíon Mainet\10_RealPriceBrain\bin\Debug\net10.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Cursos\BlockChain\Nivel4\Ejecucíon Mainet\10_RealPriceBrain\bin\Debug\net10.0\Microsoft.Extensions.Primitives.dll
+C:\Cursos\BlockChain\Nivel4\Ejecucíon Mainet\10_RealPriceBrain\bin\Debug\net10.0\Sprache.dll
