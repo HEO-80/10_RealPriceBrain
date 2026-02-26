@@ -48,28 +48,34 @@ class Program
         {
             try
             {
-                // 1. Consultamos AMBOS exchanges a la vez
+                // 1. Consultamos AMBOS pools (USDT y USDC contra WBNB)
+                // Usamos la dirección USDC/WBNB como nuestro segundo "DEX"
+                string poolB = "0xd99c7F6C65857AC913a8f880A4cb84032AB2FC5b"; 
+                
                 var resPancake = await handler.QueryDeserializingToObjectAsync<ReservesOutput>(getReservesMessage, poolPancake);
-                var resBiswap = await handler.QueryDeserializingToObjectAsync<ReservesOutput>(getReservesMessage, poolBiswap);
+                var resExchangeB = await handler.QueryDeserializingToObjectAsync<ReservesOutput>(getReservesMessage, poolB);
 
-                // Solo seguimos si ambos responden correctamente
-                if (resPancake != null && resBiswap != null && resPancake.Reserve0 > 0 && resBiswap.Reserve0 > 0)
+                if (resPancake != null && resExchangeB != null && resPancake.Reserve0 > 0 && resExchangeB.Reserve0 > 0)
                 {
-                    // 2. Calculamos Precio en PancakeSwap (USDT es Token0, WBNB es Token1)
+                    // Precio en Pool A (USDT/WBNB)
                     decimal pUsdt0 = (decimal)resPancake.Reserve0 / 1000000000000000000m;
                     decimal pWbnb1 = (decimal)resPancake.Reserve1 / 1000000000000000000m;
-                    decimal pricePancake = pUsdt0 / pWbnb1;
+                    decimal priceA = pUsdt0 / pWbnb1;
 
-                    // 3. Calculamos Precio en Biswap (Igual: USDT es Token0, WBNB es Token1)
-                    decimal bUsdt0 = (decimal)resBiswap.Reserve0 / 1000000000000000000m;
-                    decimal bWbnb1 = (decimal)resBiswap.Reserve1 / 1000000000000000000m;
-                    decimal priceBiswap = bUsdt0 / bWbnb1;
+                    // Precio en Pool B (USDC/WBNB)
+                    decimal bUsdc0 = (decimal)resExchangeB.Reserve0 / 1000000000000000000m;
+                    decimal bWbnb1 = (decimal)resExchangeB.Reserve1 / 1000000000000000000m;
+                    decimal priceB = bUsdc0 / bWbnb1;
 
-                    // 4. Calculamos la diferencia bruta (Spread)
-                    decimal spread = Math.Abs(pricePancake - priceBiswap);
+                    // Spread matemático
+                    decimal spread = Math.Abs(priceA - priceB);
 
-                    // Imprimimos la comparativa en pantalla
-                    Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] Pancake: {pricePancake:F2} | Biswap: {priceBiswap:F2} | Spread: {spread:F3} USDT");
+                    Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] USDT-BNB: {priceA:F2} | USDC-BNB: {priceB:F2} | Spread: {spread:F3} $");
+                }
+                else 
+                {
+                    // NUEVO: El chivato por si hay fallo silencioso
+                    Console.WriteLine("Aviso: Uno de los pools está vacío o la dirección es incorrecta.");
                 }
             }
             catch (Exception e)
